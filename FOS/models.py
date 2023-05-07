@@ -17,7 +17,12 @@ class Product(BaseModel):
     product_desc=models.TextField()
     product_price=models.IntegerField(default=0)
     product_demo_price=models.IntegerField(default=0)
+    
+
+class ProductMetaInformation(BaseModel):
+    product=models.OneToOneField(Product, on_delete=models.CASCADE)
+    product_measuring = models.CharField(null=True, blank=True, max_length=100, choices=(('kg','kg'),('ml','ml'),('mg','mg'),('g','g'),(None,None)))
     quantity=models.CharField(null=True, blank=True, max_length=100)
   
 class ProductImages(BaseModel):
-    product_image=models.ImageField()
+    product_image=models.ImageField(upload_to='product')
